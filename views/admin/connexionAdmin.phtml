@@ -1,0 +1,37 @@
+
+<?php if( !$this -> isConnectAdmin()) : ?>
+<h2><i class="fa fa-lock"></i> Se connecter avec un compte administrateur</h2>
+
+<form class="generic-form" action="index.php?action=connexionAdmin" method="POST">
+
+	<fieldset>
+		<legend>Informations d'authentification</legend>
+		<ul>
+			<li>
+				<label for="email">E-mail :</label>
+				<input id="email" type="text" name="email" data-required data-name="E-mail">
+			</li>
+			<li>
+				<label for="password">Mot de passe :</label>
+				<input id="password" type="password" name="password" data-required data-name="Mot de passe">
+			</li>
+		</ul>
+	</fieldset>
+
+	<ul>
+		<li>
+			<input class="button button-primary" type="submit" value="Connexion">
+			<a class="button button-cancel small" href="index.php">Annuler</a>
+		</li>
+	</ul>
+</form>
+<?php else: ?>
+
+<article id="homeAdmin">
+    <a href="index.php?action=addMeal">Ajouter un produit</a>
+    <a href="index.php?action=modifMeal">Modifier un produit</a>
+    <a href="index.php?action=affResa">Afficher la liste des réservations</a>
+    <a href="index.php?action=displayOrder">Afficher la liste des commandes</a>
+</article>
+
+<?php endif; ?>

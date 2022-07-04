@@ -1,0 +1,36 @@
+<form>
+    
+    <select id="repas">
+        <?php foreach($meals as $meal): ?>
+            <option value="<?= $meal['Id']?>"><?= $meal['Name']?></option>
+        <?php endforeach; ?> 
+    </select>
+    
+    <div id="details">
+        
+    </div>
+    <input type="number" min="1" max="10" id="quantite"/>
+    <input type="submit" value="Ajouter" id="Ajouter"/>
+    
+    <div id='confirm'>
+        <table>
+            <thead>
+                <tr>
+                    <th>Nom produit</th>
+                    <th>Prix unitaire</th>
+                    <th>Quantité</th>
+                    <th>Sous total</th>
+                </tr>
+            </thead>
+            <tbody id="panier">
+                
+                <tr><td>Votre panier est vide </td></tr>
+                
+            </tbody>
+            <tfoot id="total">
+                
+            </tfoot>
+        </table>
+    </div>
+    <input type="button" id="valider" value="valider votre commande"/>
+</form>

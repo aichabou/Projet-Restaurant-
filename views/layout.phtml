@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>3WA Restaurant</title>
+
+    <link rel="stylesheet" href="views/css/normalize-3.0.3.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Oleo+Script+Swash+Caps|Karla">
+
+    <!-- Feuilles de styles de l'application -->
+    <link rel="stylesheet" href="views/css/3wa-resto.css">
+    <link rel="stylesheet" href="views/css/ui-button.css">
+    <link rel="stylesheet" href="views/css/ui-form.css">
+    <link rel="stylesheet" href="views/css/ui-table.css">
+
+    <!-- Librairie jQuery -->
+    <script
+			  src="https://code.jquery.com/jquery-3.4.1.min.js"
+			  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+			  crossorigin="anonymous"></script>
+    <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+
+    <!-- JavaScript de l'application -->
+
+    <!--<script src="www/js/valid_action_commande.js"></script>-->
+    <!--<script src="www/js/admin.js"></script>-->
+
+</head>
+<body>
+
+    <!-- En-tête commune -->
+    <header>
+        <h1>
+            <a href="index.php">
+                <img src="views/images/logo.gif" height="63" width="57" alt="3WA Restaurant">Restaurant - Made In America !
+            </a>
+        </h1>
+    </header>
+
+    <!-- Interface utilisateur -->
+    <nav class="user-interface">
+        <ul class="link-list">
+            <?php if($this -> isConnect()): ?>
+                <li>   
+                    <a class="button button-primary" href="index.php?action=booking">Réserver</a>
+                    <a class="button button-primary" href="index.php?action=commander">Commander</a>
+                </li>
+                <li class="layout-right">
+                    <p class="welcome">Bonjour <strong><?= $_SESSION['user']['prenom'] ?> <?= $_SESSION['user']['nom'] ?></strong> !</p>
+                    <a class="button button-primary" href="index.php?action=deconnexion">Déconnexion</a>
+                </li>
+            <?php elseif($this -> isConnectAdmin()) : ?>
+                 <li>
+                    <a class="button button-primary" href="index.php?action=connexionAdmin">Panneau administrateur</a>
+                </li>
+                <li class="layout-right">
+                    <p class="welcome">Bonjour <strong><?= $_SESSION['administrateur']['nom'] ?></strong> !</p>
+                    <a class="button button-primary" href="index.php?action=deconnexion">Déconnexion</a>
+                </li>
+            
+            <?php else: ?>
+                <li>
+                    <a class="button button-primary" href="index.php?action=create_account">Créer un compte</a>
+                </li>
+                <li class="layout-right">
+                    <a class="button button-primary" href="index.php?action=connexion">Connexion</a>
+                </li>
+            <?php endif; ?>
+        </ul>
+    </nav>
+    
+   
+    
+    <main>
+        <!-- insertion de message si existant -->
+        <?php if(isset($message)): ?>
+            <p><?= $message ?></p>
+        <?php endif; ?>
+        
+        <?php if(array_key_exists("message",$_GET)): ?>
+            <p><?= $_GET['message'] ?></p>
+        <?php endif; ?>
+        
+        <!-- Affichage du template lié à la vue -->
+        <?php include $template.".phtml"; ?>
+    </main>
+
+    <!-- Pied de page commun -->
+    <footer>
+        <ul class="link-list">
+            <li><img src="views/images/payment/visa.png" alt="Visa"></li>
+            <li><img src="views/images/payment/mastercard.png" alt="MasterCard"></li>
+            <li><img src="views/images/payment/paypal.png" alt="PayPal"></li>
+        </ul>
+        <small>Réalisé avec <i class="fa fa-heart"></i>&nbsp; par les élèves de la 3W Academy</small>
+    </footer>
+
+    <!-- Code principal JavaScript de l'application -->
+    <script type="text/javascript" src="views/js/valide_cmd.js"></script>
+</body>
+</html>

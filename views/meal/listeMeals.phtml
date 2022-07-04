@@ -1,0 +1,45 @@
+<?php if(!array_key_exists("idMeal",$_GET)): ?>
+<table>
+    <thead>
+        <tr>
+            <th>Photo</th>
+            <th>Nom</th>
+            <th>Description</th>
+            <th>Prix</th>
+            <th>Modifier</th>
+            <th>Supprimer</th>
+        </tr>
+    </thead>
+    <tbody>
+    <?php foreach($meals as $meal) : ?>
+        <tr>
+            <td><img src="views/images/meals/<?= $meal['Photo'] ?>"></td>
+            <td><?= $meal['Name'] ?></td>
+            <td><?= $meal['Description'] ?></td>
+            <td><?= $meal['SalePrice'] ?></td>
+            <td><a href="index.php?action=modifMeal&idMeal=<?= $meal['Id'] ?>">modifier</a></td>
+            <td><a href="index.php?action=suppMeal&idMeal=<?= $meal['Id'] ?>">supprimer</a></td>
+        </tr>
+    <?php endforeach; ?> 
+    </tbody>
+</table>
+<?php else: ?>
+    <h2><i class="fas fa-plus-square"></i> Modifier un produit alimentaire </h2>
+
+    <form method="POST" action="index.php?action=modifMeal" enctype="multipart/form-data">
+        <input type="hidden" name="idMeal" value="<?= $meal['Id'] ?>"/>
+    	<fieldset class="authentification ">
+    		<legend><i class="fas fa-check"></i> Caractéristiques</legend>
+    		<p><label>Nom: </label><input type="text" name="ajout_nom" value="<?= $meal['Name'] ?>"></p>
+    		<p><label>Description: </label><textarea name="description"><?= $meal['Description'] ?></textarea></p>
+    		<p><label>Photo: </label><input type="file" name="photo"></p>
+    	</fieldset>
+    
+    	<fieldset class="authentification " id="Approvisionnement">
+    		<legend><i class="fas fa-retweet"></i> Approvisionnement</legend>
+    		<label>Prix de vente: </label><input type="text" name="prix_vente" value="<?= $meal['SalePrice'] ?>"> €
+    	</fieldset>
+    	<input type="submit" name="ajouter" value="Modifier" class="button" id="ajout_produit">
+    	<a href="index.php" class="cancel">Annuler</a>
+    </form>
+<?php endif; ?>
